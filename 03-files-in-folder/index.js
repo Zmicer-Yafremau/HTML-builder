@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const arr=[];
 function st(file){
 
     fs.stat(path.join(__dirname,'secret-folder',file),(error,stats)=>{
