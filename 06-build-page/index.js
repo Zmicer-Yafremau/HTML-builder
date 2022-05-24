@@ -34,15 +34,15 @@ fs.writeFile(
 async function copyDirectory () {
   try {
     const readDir = await fsPromise.readdir('06-build-page/assets', {withFileTypes: true});
-    for (let i = 0; i<readDir.length; i++) {
-      let copies = await fsPromise.readdir(`06-build-page/assets/${readDir[i].name}`, {withFileTypes: true});
-      console.log(readDir[i].name);
-      fs.mkdir(`06-build-page/project-dist/assets/${readDir[i].name}`, { recursive: true }, err => {
+    for (const dir of readDir) {
+      let copies = await fsPromise.readdir(`06-build-page/assets/${dir.name}`, {withFileTypes: true});
+      console.log(dir.name);
+      fs.mkdir(`06-build-page/project-dist/assets/${dir.name}`, { recursive: true }, err => {
         if(err) throw err; 
       });
-      let readyCopy = await fsPromise.readdir(`06-build-page/project-dist/assets/${readDir[i].name}`, {withFileTypes: true});
+      let readyCopy = await fsPromise.readdir(`06-build-page/project-dist/assets/${dir.name}`, {withFileTypes: true});
       for (const file of readyCopy) {
-        fs.unlink(`06-build-page/project-dist/assets/${readDir[i].name}/${file.name}`, function(err){
+        fs.unlink(`06-build-page/project-dist/assets/${dir.name}/${file.name}`, function(err){
           if (err) {
             console.log(err);
           } 
@@ -50,7 +50,7 @@ async function copyDirectory () {
       }
       for (const copy of copies) {
         // console.log(`06-build-page/assets/${readDir[i].name}/${copy.name}`)
-        fs.copyFile(`06-build-page/assets/${readDir[i].name}/${copy.name}`, `06-build-page/project-dist/assets/${readDir[i].name}/${copy.name}`, (err) => {
+        fs.copyFile(`06-build-page/assets/${dir.name}/${copy.name}`, `06-build-page/project-dist/assets/${dir.name}/${copy.name}`, (err) => {
           if (err) {
             console.log('Error Found:', err);
           }  
