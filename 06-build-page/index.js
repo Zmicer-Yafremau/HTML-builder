@@ -18,20 +18,12 @@ function replaceSections(chunk,...args){
                 (err, dataT) => {
                     if (err) throw err;
                     temp[el.split('.')[0]] = dataT.toString();
-                    if (option===1){
                         output.write(
                             chunk.replace(/\{\{footer\}\}/, temp.footer)
                                  .replace(/\{\{articles\}\}/, temp.articles)
                                  .replace(/\{\{about\}\}/, temp.about)
                                  .replace(/\{\{header\}\}/, temp.header)
                                  );
-                    } else {
-                        output.write(
-                            chunk.replace(/\{\{footer\}\}/, temp.footer)
-                                 .replace(/\{\{articles\}\}/, temp.articles)
-                                 .replace(/\{\{header\}\}/, temp.header)
-                                 );
-                    }
                 }
             ); 
         } else {
