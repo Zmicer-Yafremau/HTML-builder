@@ -32,7 +32,6 @@ function replaceSections(chunk,...args){
                                  .replace(/\{\{header\}\}/, temp.header)
                                  );
                     }
-                 
                 }
             ); 
         } else {
