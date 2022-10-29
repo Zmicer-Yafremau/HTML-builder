@@ -15,4 +15,3 @@ fs.readdir( folderPath, { withFileTypes: true }, (err,files)=>{
         if (file.isFile()) scanFiles(file.name);
     });
 })
-
