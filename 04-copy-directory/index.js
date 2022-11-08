@@ -1,4 +1,3 @@
-/* Уважаемый проверяющий, дай мне, пожалуйста, день на доработку этой задачи. Не заметил ошибку, сейчас на работе, вечером исправлю. Заранее спасибо! */
 
 const fs = require('fs');
 const path = require('path');
@@ -8,6 +7,20 @@ fs.mkdir(filesCopyPath,
     { recursive: true },
     err=>{
        if (err) throw err;
+});
+fs.readdir(filesCopyPath, 
+    { withFileTypes: true }, 
+    (err,files)=>{
+    if (err) console.log(err);
+    files.forEach(file=>{
+        if (file.isFile()){
+            fs.unlink(path.join(filesCopyPath, file.name),
+                        err=>{
+                        if (err) throw err;
+                        }
+                        );
+        }
+    });
 });
 fs.readdir(filesPath, 
     { withFileTypes: true }, 
